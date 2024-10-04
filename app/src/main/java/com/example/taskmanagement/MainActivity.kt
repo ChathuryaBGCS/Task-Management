@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.taskmanagement.databinding.ActivityMainBinding
 import com.example.taskmanagement.utils.setupDialog
+import com.google.android.material.textfield.TextInputEditText
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,6 +29,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private val loadingDialog: Dialog by lazy {
+        Dialog(this,R.style.DialogCustomTheme).apply {
+            setupDialog(R.layout.loading_dialog)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mainBinding.root)
@@ -37,6 +44,9 @@ class MainActivity : AppCompatActivity() {
 
         addCloseImg.setOnClickListener { addTaskDialog.dismiss() }
         updateCloseImg.setOnClickListener { updateTaskDialog.dismiss() }
+
+        val edName = findViewById<TextInputEditText>(R.id.eTaskTitle)
+        val edDesc = findViewById<TextInputEditText>(R.id.eTaskDesc)
 
         mainBinding.addTaskBtn.setOnClickListener {
             addTaskDialog.show()
